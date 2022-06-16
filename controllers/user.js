@@ -23,7 +23,7 @@ exports.read = (req, res) => {
 
 exports.update = (req, res) => {
     
-    const { name, password } = req.body;
+    const { name, password,role } = req.body;
 
     User.findOne({ _id: req.profile._id }, (err, user) => {
         if (err || !user) {
@@ -48,6 +48,8 @@ exports.update = (req, res) => {
                 user.password = password;
             }
         }
+
+        user.role = role;
 
         user.save((err, updatedUser) => {
             if (err) {
